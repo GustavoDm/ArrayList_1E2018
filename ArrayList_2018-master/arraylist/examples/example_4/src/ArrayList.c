@@ -439,14 +439,14 @@ int al_containsAll(ArrayList* this,ArrayList* this2)
     int i;
     if(this != NULL && this2 != NULL)
     {
-        for(i=0;i<this2->size;i++)
+        for(i=0; i<this2->size; i++)
         {
             returnAux=1;
 
             if(*(this->pElements+i) != *(this2->pElements+i))
             {
-            returnAux = 0;
-            break;
+                returnAux = 0;
+                break;
             }
         }
     }
@@ -465,22 +465,32 @@ int al_sort(ArrayList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux = -1;
     int i, j;
+    int auxOrder=1;
 
-	void* auxiliar;
+    void* auxiliar;
+
+    if(order== 1)
+        auxOrder=-1;
 
 
-	for(i = 1; i < al_len(this); i++) {
-		auxiliar = al_get(this,i);
-		j = i;
+    if(this !=NULL && pFunc !=NULL && (order == 1 || order == 0))
+    {
 
-		while((j > 0 && pFunc(auxiliar, al_get(this, j-1)) == order)  )
-		{
-			al_set(this,j, al_get(this, j-1));
-			j--;
-		}
-		al_set(this, j, auxiliar);
-	}
+        for(i = 1; i < al_len(this); i++)
+        {
+            auxiliar = al_get(this,i);
+            j = i;
 
+            while((j > 0 && pFunc(auxiliar, al_get(this, j-1)) == auxOrder)  )
+            {
+                al_set(this,j, al_get(this, j-1));
+                j--;
+            }
+            al_set(this, j, auxiliar);
+            returnAux=0;
+        }
+
+    }
 
     return returnAux;
 }
