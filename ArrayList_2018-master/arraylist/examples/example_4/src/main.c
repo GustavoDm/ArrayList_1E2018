@@ -42,9 +42,9 @@ int main(void)
         startTesting(12);
         startTesting(13);
         startTesting(14);
-        /*startTesting(15);
+        startTesting(15);
         startTesting(16);
-        startTesting(17);*/
+        startTesting(17);
 
     return 0;
 }
